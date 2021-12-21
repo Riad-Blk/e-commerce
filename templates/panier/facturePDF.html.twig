@@ -1,0 +1,81 @@
+{% extends 'base_pdf.html.twig' %}
+
+{% block body %}
+<h1> Bon pour retrait de votre commande</h1>
+<table class="table mt-3" >
+        <thead class="txt-white">
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Telephone</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ app.user.client.nom }}</td>
+                <td>{{ app.user.client.prenom }}</td>
+                <td>{{ app.user.client.phone }}</td>
+                <td>{{ app.user.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table mt-3">
+    <thead class="txt-white">
+        <tr>
+            <th>Produit</th>
+            <th>Taille</th>
+            <th>Couleur</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.produit.titre }}</td>
+                <td>{% if item.produit.taille %} {{ item.produit.taille }} {% endif %}</td>
+                <td>{% if item.produit.couleur %} {{ item.produit.couleur }}{% endif %}</td>
+                <td>
+                    {% if item.produit.promo %}
+                        <del>{{ item.produit.prix | number_format(0, ',', ' ')}} €</del> <br>- 
+                        {{ item.produit.promo }} % = {{ item.produit.getPrixpromo | number_format(0, ',', ' ')}} €
+                    {% else %}
+                        {{ item.produit.prix | number_format(0, ',', ' ')}} €
+                    {% endif %}
+                </td>
+                <td>{{ item.quantité }}</td>
+                <td>{{ item.produit.getPrixpromo * item.quantité  | number_format(0, ',', ' ')}} €</td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot class="txt-white">
+        <tr>
+            <td colspan="5" class="text-right">Total : </td>
+            <td>{{ total | number_format(0, ',', ' ')}} €</td> 
+        </tr>
+    </tfoot>
+</table>
+Point de retrait :
+    <table class="table mt-3">
+    <thead class="txt-white">
+            <tr>
+                <th>Tournée </th>
+                <th>Ville</th>
+                <th>Adresse</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ concert.tournee }}</td>
+            <td>{{ concert.ville }}</td>
+            <td>{{ concert.adresse }}</td>
+            <td>{{ concert.date| date('d/m/Y')  }}</td>
+        </tr>
+    </tbody>
+</table>
+Le payement s'effectue au retrait de la commande.  Merci de votre visite.
+{% endblock  %}

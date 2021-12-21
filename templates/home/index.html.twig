@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home | Oxygen Live{% endblock %}
+
+{% block body %}
+<h3 class="txt-white txt-xxl">Promo !</h3>
+<div class="d-flex txt-white">
+{% for promo in selectpromo %}
+<div class="my-3 col-md-4">
+{% include 'home/_promocard.html.twig' with {promo} only %}
+</div>
+{% endfor %}
+</div>
+{% endblock %}

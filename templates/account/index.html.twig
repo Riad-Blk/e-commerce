@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %}Utilisateur Oxygen Live{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('message') %}
+  <div class="alert alert-success" role="alert">
+  {{ message }}
+{% endfor %}
+</div>
+<div class="container">
+  <h1>Profil de {{ app.user.client.nom }} {{ app.user.client.prenom }}</h1>
+  </div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-7">E-mail:</div>
+    <div class="col-sm-2">{{ app.user.email }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-7">Nom :</div>
+    <div class="col-sm-2">{{ app.user.client.nom }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-7">Prénom :</div>
+    <div class="col-sm-2">{{ app.user.client.prenom }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-7">Numéro de téléphone :</div>
+    <div class="col-sm-2 ">{{ app.user.client.phone }}</div>
+  </div>
+  <div class="row">
+    <a class="btn btn-primary" href="{{ path('edit_account') }}" role="button">Modifier le profil</a>
+  </div>
+  <div class="row">
+    <a class="btn btn-primary" href="{{ path('edit_pass_account') }}" role="button">Modifier le mot de passe</a>
+</div>
+</div>
+
+
+<h1>Adresses</h1>
+
+  <table class="table">
+      <tbody>
+        <tr>
+        <th>Rue</th>
+        <th>Code postal</th>
+        <th>Ville</th>
+        <th>Actions</th>
+        </tr>
+        {% for adresse in adresses %}
+        <tr>
+        <td>{{ adresse.rue }}</td>
+        <td>{{ adresse.codepostal }}</td>
+        <td>{{ adresse.ville }}</td>
+        <td>
+          <a href="{{ path('adresse_edit', {'id':adresse.id}) }}">modifier adresse</a>
+          {{ include('account/_delete_form.html.twig') }}
+        </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+
+  <a href="{{ path('adresse_new') }}">Ajouter une adresse</a>
+
+{% endblock %}

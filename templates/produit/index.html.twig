@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProduitController!{% endblock %}
+
+{% block body %}
+<div class="box-black text-black bg-white">
+    <h1 href="{{ path('show_produit', {'id': produit.id}) }}" class="m-3 txt-xxl">
+        {{ produit.titre }}
+    </h1>
+    <div class="d-flex p-2 my-3">
+        <div class="col-4">
+            <img class="img-fluid box-black my-3" src="{{ produit.image }}" alt="Image de {{ produit.titre }}" width="400" height=auto>
+        </div>
+        <div class="col-8 mt-4">
+            <p>
+                {{ produit.description }}<br><br>
+                {{ produit.couleur }}<br><br>
+                {{ produit.taille }}<br><br>
+                {{ produit.prix }} €</p>
+            <hr>
+            <a href="{{ path('panier_add', {'id': produit.id}) }}" class="btn btn-success float-right">
+                <i class="fas fa-shopping-cart mr-1"></i>
+                Ajouter
+            </a>
+        </div>
+    </div>
+</div>
+<section class="comments container mb-4">
+    {% for comment in produit.comments %}
+	    <div class="row mb-4 wlt-1">
+		    <div class="col-3 txt-white">
+			    {{comment.author}} <small class="txt-s">le {{comment.CreatedAt | date('d/m/Y à H:i')}}</small>
+			</div>
+			<div class="txt-white col-9">
+			    {{comment.content | raw}}
+			</div>
+		</div>
+	{% endfor %}
+    {{ form_start(commentForm) }}
+    {{ form_widget(commentForm) }}
+    <button type="submit" class="btn btn-success">Post</button>
+    {{ form_end(commentForm) }}
+</section>
+{% endblock %}

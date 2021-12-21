@@ -1,0 +1,109 @@
+.txt-black, .txt-black:hover {
+    color: #202020 !important;
+    text-shadow: 0 0 1px #959595;
+
+    text-decoration: none;
+}
+.txt-white, .txt-white:hover {
+    color: #fff !important;
+    text-shadow: 0 0 1px #BBBBBB;
+    text-decoration: none;
+}
+.txt-red {
+    color: #f00 !important;
+}
+.bg-black {
+    background: #202020 !important;
+}
+.bg-white {
+    background: #fff !important;
+    box-shadow: inset 0 0 2px #353535;
+}
+.bll-1 {
+    border-left: 1px solid #202020 !important;
+}
+.blr-1 {
+border-right: 1px solid #202020 !important;
+}
+.blt-1 {
+border-top: 1px solid #202020 !important;
+}
+.blb-1 {
+border-bottom: 1px solid #202020 !important;
+}
+.wll-1 {
+    border-left: 1px solid #fff !important;
+}
+.wlr-1 {
+border-right: 1px solid #fff !important;
+}
+.wlt-1 {
+border-top: 1px solid #fff !important;
+}
+.wlb-1 {
+border-bottom: 1px solid #fff !important;
+}
+.box-black {
+    border: 1px solid #202020 !important;
+    border-radius: 4px !important;
+}
+.box-white {
+    border: 1px solid #fff !important;
+    border-radius: 6px !important;
+}
+.bg-bg,body {
+    background: linear-gradient(to top, #101010, #353535) !important;
+}
+.txt-xxl {
+    font-size: xx-large;
+}
+.txt-xl {
+    font-size: x-large;
+}
+.txt-l {
+    font-size: large;
+}
+.txt-m {
+    font-size: medium;
+}
+.txt-s {
+    font-size: small;
+}
+.txt-xs {
+    font-size: x-small;
+}
+.navbar .megamenu{
+    padding: 1rem;
+}
+@media all and (min-width: 992px) {
+
+.navbar .has-megamenu {
+    position: static !important;
+    }
+    .navbar .megamenu {
+        left:0;
+        right:0;
+        width:100%;
+        padding-top:0;
+    }
+}
+@media(max-width: 991px) {
+    .navbar.fixed-top .navbar-collapse, .navbar.sticky-top .navbar-collapse {
+        overflow-y: auto;
+        max-height: 90vh;
+        padding-top:10px;
+    }
+}
+.card-body
+{
+    height: 550px !important;
+    min-width: 285px !important;
+}
+.card {
+    border: 1px solid #202020 !important;
+    border-radius: 4px !important;
+}
+.sidebar
+{
+    max-width: 235px !important;
+}

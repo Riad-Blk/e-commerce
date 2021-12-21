@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProduitsController!{% endblock %}
+
+{% block body %}
+<div class="d-flex txt-white">
+    <nav class="sidebar">
+        <div class="col sidebar-sticky">
+            {{ knp_pagination_sortable(produits, 'Prix','p.prix') }}
+            {{ knp_pagination_sortable(produits, 'Promo','p.promo') }}
+            {% include'produits/_filter.html.twig' with {form: form} only %}
+            {{ knp_pagination_render(produits) }}
+        </div>
+    </nav>
+    <div class="row">
+        {% for produit in produits %}
+        <div class="mt-3 col-md-4">
+        {% include 'produits/_card.html.twig' with {produit: produit} only %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

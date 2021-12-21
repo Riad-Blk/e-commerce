@@ -1,0 +1,31 @@
+<div class="card d-flex">
+    <div class="card-body bg-white">
+        <a href="{{ path('show_produit', {'id': category.id}) }}"><img class="card-img-top box-black mb-2" src="{{ category.image }}" alt="Image de {{ category.titre }}" width="100" height=auto>
+        </a>
+        <a href="{{ path('show_produit', {'id': category.id}) }}">
+            <h5 class="card_title txt-black" >{{ category.titre }}</h5>
+        </a>
+        <div class="card_title text-primary" style="font-weight: bold;font-size: 1.5rem;" >
+            
+            {% if category.promo %}
+                <div class="text text-warning">PROMO ! {{ category.promo }} %</div>
+                <del>{{ category.prix | number_format(0, ',', ' ')}} €</del> - {{ category.prixpromo | number_format(0, ',', ' ')}} €
+            {% else %}
+            {{ category.prix | number_format(0, ',', ' ')}} €
+            {% endif %}
+        </div>
+        <p class="txt-black">{{ category.description }}</p>
+    <div class="pt-3 blt-1 d-flex align-items-center ">
+        <div class="col">
+            {% for c in category.categories %}
+                <em class="text-muted text-italic float-left"> #{{ c.name }} </em><br>
+            {% endfor %}
+        </div>
+            <a href="{{ path('panier_add', {'id': category.id}) }}" class="col btn btn-success box-black float-right">
+                <i class="fas fa-shopping-cart mr-1">
+                </i>
+                Ajouter
+            </a>
+        </div>
+    </div>
+</div>

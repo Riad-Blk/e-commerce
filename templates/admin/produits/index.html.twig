@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits index{% endblock %}
+
+{% block body %}
+    <h1>Produits index</h1> 
+    <a href="{{ path ('admin') }}" class="btn btn-link">Retour à la navigation</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Prix</th>
+                <th>Stock</th>
+                <th>Couleur</th>
+                <th>Taille</th>
+                <th>Actif</th>
+                <th>Promo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.id }}</td>
+                <td>{{ produit.titre }}</td>
+                <td>{{ produit.description }}</td>
+                <td>{{ produit.image }}</td>
+                <td>{{ produit.prix }}</td>
+                <td>{{ produit.stock }}</td>
+                <td>{{ produit.couleur }}</td>
+                <td>{{ produit.taille }}</td>
+                <td>{{ produit.actif ? 'Yes' : 'No' }}</td>
+                <td>{{ produit.promo }}</td>
+                <td>
+
+                    <a href="{{ path('admin_produits_show', {'id': produit.id}) }}" class="btn btn-outline-info">Voir</a>
+                    <a href="{{ path('admin_produits_edit', {'id': produit.id}) }}" class="btn btn-outline-primary">Modif</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_produits_new') }}" class="btn btn-primary">Créer un nouveau</a>
+{% endblock %}

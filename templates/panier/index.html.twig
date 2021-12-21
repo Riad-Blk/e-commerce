@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanierController!{% endblock %}
+
+{% block body %}
+{% if items | length > 0 %}
+    <table class="table mt-3">
+        <thead class="txt-white">
+            <tr>
+                <th>Produit</th>
+                <th>Taille</th>
+                <th>Couleur</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody class="txt-white">
+            {% for item in items %}
+                 <tr>
+                    <td><a href="{{ path('show_produit', {'id': item.produit.id}) }}">
+                    <img class="box-black img-fluid" src="{{ item.produit.image }}" alt="Image de {{ item.produit.titre }}" width="50" height=auto>
+                <a/>
+                <a href="{{ path('show_produit', {'id': item.produit.id}) }}" class="txt-white ml-1">{{ item.produit.titre }}</a></td>
+            <td>{% if item.produit.taille %} {{ item.produit.taille }} {% endif %}</td>
+            <td>{% if item.produit.couleur %} {{ item.produit.couleur }}{% endif %}</td>
+                    <td>
+                        {% if item.produit.promo %}
+                            <del>{{ item.produit.prix | number_format(0, ',', ' ')}} €</del> - 
+                            {{ item.produit.promo }} % = {{ item.produit.getPrixpromo | number_format(0, ',', ' ')}} €
+                        {% else %}
+                            {{ item.produit.prix | number_format(0, ',', ' ')}} €
+                        {% endif %}
+                    </td>
+                    <td>{{ item.quantité }}</td>
+                    <td>{{ item.produit.getPrixpromo * item.quantité  | number_format(0, ',', ' ')}} €</td>
+                    <td>  <a href="{{ path('panier_add', {'id': item.produit.id}) }}" class="btn btn-success float-right">
+                        <i class="fas fa-shopping-cart mr-1"></i>
+                        +1
+                        </a>
+                        <a href="{{ path('panier_subst', {'id': item.produit.id}) }}" class="btn btn-success float-right">
+                        <i class="fas fa-shopping-cart mr-1"></i>
+                        -1
+                        </a>
+                        <a href="{{ path('panier_remove',{'id': item.produit.id})}}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot class="txt-white">
+            <tr>
+                <td></td>
+                <td></td>
+                <td colspan="3" class="text-right">Total : </td>
+                <td>{{ total  | number_format(0, ',', ' ')}}</td>
+                
+            </tr>
+        </tfoot>
+    </table>
+    Choix du point de retrait
+<table class="table mt-3">
+    <thead class="txt-white">
+            <tr>
+                <th> </th>
+                <th>Tournée </th>
+                <th>Ville</th>
+                <th>Adresse</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <form  action="{{ path('panier_facture')}}" method="POST">
+        {% for concert in concerts %}
+        <tr>
+            <td> <input type="radio" id="point" name="point" value={{ concert.id }}> <br></td>
+            <td>{{ concert.tournee }}</td>
+            <td>{{ concert.ville }}</td>
+            <td>{{ concert.adresse }}</td>
+            <td>{{ concert.date | date('d/m/Y')}}</td>
+        </tr>
+    {% endfor %}
+    <tfoot class="txt-white">
+    <tr>
+        <td></td>
+        <td></td>
+        <td colspan="3" class="text-right"><button type="submit">test</button></td>
+        <td><a rtype="submit" href="{{ path('panier_facture')}}" class="btn btn-danger btn-sm">Valider Panier<i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+        </td>
+    </tr>
+</tfoot>
+    </form>
+    </tbody>
+</table>
+{% else %}
+<p>Désolé, Panier vide !!</p> 
+{% endif %}
+{% endblock %}

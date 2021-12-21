@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AdminCategoryProduits{% endblock %}
+
+{% block body %}
+<h1>Gérer les produits et les catégories</h1>
+    <a href="{{ path ('admin') }}" class="btn btn-link">Retour à la navigation</a>
+
+    {% for message in app.flashes ('message') %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary">Sauvegarder</button>
+{{ form_end(form) }}
+
+{% endblock %}
